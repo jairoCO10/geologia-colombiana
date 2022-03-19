@@ -60,8 +60,12 @@ def app():
         #     m.add_legend(legend_dict=legend_dict)
         
     m.to_streamlit(width, height)
+    buffered = io.BytesIO()
         #st.download_button("hola", m.save("filename.png"))
-    st.sidebar.button("Imprimir", m.save("filename.png",))
+    m.save(buffered, format="JPEG")
+    #img_str = base64.b64encode(buffered.getvalue()).decode()
+    #href =  f'<a href="data:file/txt;base64,{img_str}" download="{filename}">{text}</a>'
+    st.sidebar.button("Imprimir", m)
     st.sidebar.write("la opcion 0 muestra por defecto el mapa geologico de Colombia")
         # def get_image_download_link(img,filename,text):
         #     buffered = BytesIO()
